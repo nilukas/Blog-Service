@@ -1,0 +1,35 @@
+﻿@model AzureAssignment.Models.BlogItemViewModel
+
+@{
+    ViewBag.Title = "Details2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>@Model.Post.Title</h2> 
+    <h3>@Model.Post.Tags</h3> 
+    <h5><b>Author</b> : @Model.Post.Author</h5>
+    <h5><b>Created Date</b> : @Model.Post.CreatedDate</h5>
+</div>
+
+<div class="row">
+    <p>@Model.Post.Post</p>
+</div>
+<hr />
+<div  class="row" style="float:right;clear:both">
+    @Html.ActionLink("Add New Comment", "CreateComment", new { id = Model.Id }, new { @class = "btn btn-success" })
+</div>
+@foreach (var review in Model.UserReviews)
+{
+    <div class="row" style="border-radius: 6px;padding:10px;background-color: #f5f3f3;border:1px solid #ece9e9;clear:both">
+            <div class="col-md-3">
+                <h4>User: @review.Author</h4>
+                <h5>Date: @review.CreatedDate</h5>
+            </div>
+            <div class="col-md-9" style="border-left:2px solid #ece9e9;">
+                <p>@review.Review</p>
+            </div>
+        
+    </div>
+    <hr />
+}

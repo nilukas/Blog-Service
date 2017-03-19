@@ -1,0 +1,30 @@
+﻿@model IEnumerable<AzureAssignment.Models.BlogItemViewModel>
+
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Search Results for "@Request.QueryString["searchText"]"</h2>
+    <p class="lead"></p>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div style="border-radius: 6px;padding:10px;background-color: #f5f3f3;border:1px solid #ece9e9;">
+            <h3>
+                @Html.ActionLink(item.Post.Title, "Details", new { id = item.Id })    <small><b>Created Date : </b>@item.Post.CreatedDate</small>
+            </h3>
+            <h5><b>Author</b> : @item.Post.Author</h5>
+            <p> @item.Post.Post.Substring(0, Math.Min(item.Post.Post.Length, 100))</p>
+            <ul class="list-inline">
+                <li>@Html.ActionLink("Read More...", "Details", new { id = item.Id }, new { @class = "btn btn-success" }) </li>
+                <li>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" })</li>
+                <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-success" })</li>
+            </ul>
+        </div>
+            <hr />
+    }
+    </ div >
